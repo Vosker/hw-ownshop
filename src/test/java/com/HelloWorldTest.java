@@ -1,8 +1,8 @@
-package core.basesyntax;
+package com;
 
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class HelloWorldTest {
 
 }
