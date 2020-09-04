@@ -1,8 +1,5 @@
-package com;
+package com.lib;
 
-import com.lib.Dao;
-import com.lib.Inject;
-import com.lib.Service;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;

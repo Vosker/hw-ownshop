@@ -1,5 +1,6 @@
 package com;
 
+import com.lib.Injector;
 import com.models.Product;
 import com.service.ProductService;
 

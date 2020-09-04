@@ -1,9 +1,10 @@
-package com.service;
+package com.service.impl;
 
 import com.dao.ProductDao;
 import com.lib.Inject;
 import com.lib.Service;
 import com.models.Product;
+import com.service.ProductService;
 import java.util.List;
 
 @Service

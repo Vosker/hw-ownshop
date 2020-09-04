@@ -1,9 +1,11 @@
-package com.dao;
+package com.dao.impl;
 
+import com.dao.ProductDao;
 import com.lib.Dao;
 import com.models.Product;
 import com.storage.Storage;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Dao
@@ -17,12 +19,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Optional<Product> get(Long id) {
-        for (int i = 0; i < Storage.products.size(); i++) {
-            if (id.equals(Storage.products.get(i).getId())) {
-                return Optional.ofNullable(Storage.products.get(i));
-            }
-        }
-        return Optional.empty();
+        return Storage.products.stream().filter(product -> Objects.equals(product.getId(), (id))).findFirst();
     }
 
     @Override
@@ -42,12 +39,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean delete(Long id) {
-        for (int i = 0; i < Storage.products.size(); i++) {
-            if (Storage.products.get(i).getId().equals(id)) {
-                Storage.products.remove(i);
-                return true;
-            }
-        }
-        return false;
+        return Storage.products.removeIf(product -> Objects.equals(product.getId(), id));
     }
 }
