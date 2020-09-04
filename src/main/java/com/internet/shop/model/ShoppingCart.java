@@ -1,4 +1,4 @@
-package com.models;
+package com.internet.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;

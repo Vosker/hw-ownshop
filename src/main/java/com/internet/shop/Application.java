@@ -1,8 +1,8 @@
-package com;
+package com.internet.shop;
 
-import com.lib.Injector;
-import com.models.Product;
-import com.service.ProductService;
+import com.internet.shop.lib.Injector;
+import com.internet.shop.model.Product;
+import com.internet.shop.service.ProductService;
 
 public class Application {
 

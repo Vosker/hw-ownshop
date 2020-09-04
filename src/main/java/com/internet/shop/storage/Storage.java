@@ -1,9 +1,9 @@
-package com.storage;
+package com.internet.shop.storage;
 
-import com.models.Order;
-import com.models.Product;
-import com.models.ShoppingCart;
-import com.models.User;
+import com.internet.shop.model.ShoppingCart;
+import com.internet.shop.model.User;
+import com.internet.shop.model.Order;
+import com.internet.shop.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
