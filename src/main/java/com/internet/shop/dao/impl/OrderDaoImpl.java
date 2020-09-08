@@ -38,8 +38,8 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order update(Order order) {
         IntStream.range(0, Storage.orders.size())
-                .filter(i -> Storage.orders.get(i).getId().equals(order.getId()))
-                .forEach(item -> Storage.orders.set(item, order));
+                .filter(index -> Storage.orders.get(index).getId().equals(order.getId()))
+                .forEach(index -> Storage.orders.set(index, order));
         return order;
     }
 
