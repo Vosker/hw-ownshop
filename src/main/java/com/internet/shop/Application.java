@@ -15,10 +15,10 @@ public class Application {
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
-        Product banana = new Product("banana", 1);
-        Product apple = new Product("apple", 12);
         System.out.println("Products");
+        Product banana = new Product("banana", 1);
         productService.create(banana);
+        Product apple = new Product("apple", 12);
         productService.create(apple);
         Product orange = new Product("orange", 123);
         productService.create(orange);
