@@ -11,7 +11,7 @@ import com.internet.shop.service.UserService;
 
 public class Application {
 
-    private static final Injector injector = Injector.getInstance("com");
+    private static final Injector injector = Injector.getInstance("com.internet.shop");
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
