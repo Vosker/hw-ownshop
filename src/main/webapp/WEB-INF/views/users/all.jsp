@@ -31,6 +31,7 @@
     </c:forEach>
 </table>
 <br />
+<br />
 <a href="${pageContext.request.contextPath}/">To the main page</a>
 </body>
 </html>
