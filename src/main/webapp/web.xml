@@ -41,7 +41,7 @@
 
     <servlet-mapping>
         <servlet-name>addProductToCart</servlet-name>
-        <url-pattern>/shoppingCart/products/add</url-pattern>
+        <url-pattern>/shopping-cart/products/add</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -51,7 +51,7 @@
 
     <servlet-mapping>
         <servlet-name>showCart</servlet-name>
-        <url-pattern>/shoppingCart/products</url-pattern>
+        <url-pattern>/shopping-cart/products</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -61,7 +61,7 @@
 
     <servlet-mapping>
         <servlet-name>injectData</servlet-name>
-        <url-pattern>/injectData</url-pattern>
+        <url-pattern>/inject-data</url-pattern>
     </servlet-mapping>
 
     <servlet>

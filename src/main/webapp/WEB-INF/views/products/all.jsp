@@ -23,7 +23,7 @@
                 <c:out value="${product.price}"/>
             </td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/shoppingCart/products/add?id=${product.id}">Buy</a>
+                    <a href="${pageContext.request.contextPath}/shopping-cart/products/add?id=${product.id}">Buy</a>
                 </td>
         </tr>
     </c:forEach>
@@ -32,7 +32,7 @@
 <a href="${pageContext.request.contextPath}/products/add">Add a product</a>
 <br />
 <br />
-<a href="${pageContext.request.contextPath}/shoppingCart/products">View your cart</a>
+<a href="${pageContext.request.contextPath}/shopping-cart/products">View your cart</a>
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/">To the main page</a>

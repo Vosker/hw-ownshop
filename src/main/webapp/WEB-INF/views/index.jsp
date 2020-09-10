@@ -7,7 +7,7 @@
 <body>
 <h1>Store</h1>
 
-<a href="${pageContext.request.contextPath}/injectData">Test data</a>
+<a href="${pageContext.request.contextPath}/inject-data">Test data</a>
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/products/all">All products</a>
