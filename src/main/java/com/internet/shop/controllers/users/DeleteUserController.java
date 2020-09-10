@@ -2,6 +2,7 @@ package com.internet.shop.controllers.users;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.service.UserService;
+import com.internet.shop.service.ShoppingCartService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ public class DeleteUserController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final UserService userService =
             (UserService) injector.getInstance(UserService.class);
+    private final ShoppingCartService shoppingCartService =
+            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -19,6 +22,7 @@ public class DeleteUserController extends HttpServlet {
         String userId = req.getParameter("id");
         Long id = Long.valueOf(userId);
         userService.delete(id);
+        shoppingCartService.delete(shoppingCartService.getByUserId(id).getId());
         resp.sendRedirect(req.getContextPath() + "/users/all");
     }
 }
