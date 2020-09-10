@@ -19,8 +19,8 @@ public class ShowCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Product> products = shoppingCartService.getByUserId(USER_ID).getProducts();
-        req.setAttribute("products", products);
+        List<Product> allProducts = shoppingCartService.getByUserId(USER_ID).getProducts();
+        req.setAttribute("products", allProducts);
         req.getRequestDispatcher("/WEB-INF/views/shoppingCart/products.jsp").forward(req, resp);
     }
 }
