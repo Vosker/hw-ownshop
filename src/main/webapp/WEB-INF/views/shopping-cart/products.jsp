@@ -35,8 +35,9 @@
 <a href="${pageContext.request.contextPath}/products/all">Add more products</a>
 <br/>
 <br/>
-<form action="${pageContext.request.contextPath}/orders/add">
-    <button type="submit" name="userId" value="${userID}">Confirm order</button>
+<form method="post" action="${pageContext.request.contextPath}/orders/add">
+    <br/>
+    <button type="submit">Confirm order</button>
 </form>
 <br/>
 <a href="${pageContext.request.contextPath}/">To the main page</a>

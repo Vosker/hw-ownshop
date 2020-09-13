@@ -26,12 +26,42 @@
 
     <servlet>
         <servlet-name>allOrders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.GetAllOrdersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.orders.GetUserOrdersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>allOrders</servlet-name>
         <url-pattern>/orders/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>showOrderInfo</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.ShowOrderInfoController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>showOrderInfo</servlet-name>
+        <url-pattern>/orders/info</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>adminOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.AdminAllOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>adminOrders</servlet-name>
+        <url-pattern>/admin/orders/adminAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.DeleteOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/admin/orders/delete</url-pattern>
     </servlet-mapping>
 
     <servlet>

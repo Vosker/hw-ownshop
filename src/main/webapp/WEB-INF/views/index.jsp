@@ -17,5 +17,12 @@
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/registration">Register here</a>
+<br />
+<br />
+<a href="${pageContext.request.contextPath}/admin/products/adminAll">(Admin access) All products</a>
+<br />
+<br />
+<a href="${pageContext.request.contextPath}/admin/orders/adminAll">(Admin access) All orders</a>
+<br />
 </body>
 </html>
