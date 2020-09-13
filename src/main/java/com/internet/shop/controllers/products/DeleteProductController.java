@@ -1,15 +1,17 @@
 package com.internet.shop.controllers.products;
 
 import com.internet.shop.lib.Injector;
-import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
-import java.io.IOException;
+import com.internet.shop.service.ShoppingCartService;
+import com.internet.shop.service.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class AddProductController extends HttpServlet {
+public class DeleteProductController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final ProductService productService =
             (ProductService) injector.getInstance(ProductService.class);
@@ -17,18 +19,9 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/admin/products/add.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/admin/products/add.jsp").forward(req, resp);
-        String name = req.getParameter("name");
-        double price = Double.parseDouble(req.getParameter("price"));
-        Product product = new Product(name, price);
-        productService.create(product);
+        String userId = req.getParameter("id");
+        Long id = Long.valueOf(userId);
+        productService.delete(id);
         resp.sendRedirect(req.getContextPath() + "/admin/products/adminAll");
     }
 }
-

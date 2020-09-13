@@ -21,7 +21,17 @@
 
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
-        <url-pattern>/products/add</url-pattern>
+        <url-pattern>/admin/products/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteProduct</servlet-name>
+        <servlet-class>com.internet.shop.controllers.products.DeleteProductController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteProduct</servlet-name>
+        <url-pattern>/admin/products/delete</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -35,6 +45,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>adminProducts</servlet-name>
+        <servlet-class>com.internet.shop.controllers.products.AdminAllProductsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>adminProducts</servlet-name>
+        <url-pattern>/admin/products/adminAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>addProductToCart</servlet-name>
         <servlet-class>com.internet.shop.controllers.carts.AddProductToCartController</servlet-class>
     </servlet>
@@ -42,6 +62,16 @@
     <servlet-mapping>
         <servlet-name>addProductToCart</servlet-name>
         <url-pattern>/shopping-cart/products/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>removeProductFromCart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.carts.RemoveProductFromCartController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>removeProductFromCart</servlet-name>
+        <url-pattern>/shopping-cart/remove</url-pattern>
     </servlet-mapping>
 
     <servlet>

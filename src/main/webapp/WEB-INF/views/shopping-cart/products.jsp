@@ -11,19 +11,24 @@
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${products}">
-        <tr>
-            <td>
-                <c:out value="${product.id}"/>
-            </td>
-            <td>
-                <c:out value="${product.name}"/>
-            </td>
-            <td>
-                <c:out value="${product.price}"/>
-            </td>
-        </tr>
-    </c:forEach>
+    <c:set var="index" value="0" />
+        <c:forEach var="product" items="${products}">
+            <tr>
+                <td>
+                    <c:out value="${index = index + 1}"/>
+                </td>
+                <td>
+                    <c:out value="${product.name}"/>
+                </td>
+                <td>
+                    <c:out value="${product.price}"/>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}
+                    /shopping-cart/remove?index=${index - 1}">Remove product</a>
+                </td>
+            </tr>
+        </c:forEach>
 </table>
 <br/>
 <br/>
