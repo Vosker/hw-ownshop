@@ -15,6 +15,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>addOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.AddOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addOrder</servlet-name>
+        <url-pattern>/orders/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.GetAllOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>allOrders</servlet-name>
+        <url-pattern>/orders/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>addProduct</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.AddProductController</servlet-class>
     </servlet>
