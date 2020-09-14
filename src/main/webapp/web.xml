@@ -16,22 +16,22 @@
 
     <servlet>
         <servlet-name>addOrder</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.AddOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.orders.CompleteOrderController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>addOrder</servlet-name>
-        <url-pattern>/orders/add</url-pattern>
+        <url-pattern>/orders/complete</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>allOrders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.GetUserOrdersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.orders.ShowUserOrdersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>allOrders</servlet-name>
-        <url-pattern>/orders/all</url-pattern>
+        <url-pattern>/users/orders</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -46,12 +46,12 @@
 
     <servlet>
         <servlet-name>adminOrders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.orders.AdminAllOrdersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.orders.ShowAllOrdersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>adminOrders</servlet-name>
-        <url-pattern>/admin/orders/adminAll</url-pattern>
+        <url-pattern>/admin/orders</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -91,17 +91,17 @@
 
     <servlet-mapping>
         <servlet-name>allProducts</servlet-name>
-        <url-pattern>/products/all</url-pattern>
+        <url-pattern>/products</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>adminProducts</servlet-name>
-        <servlet-class>com.internet.shop.controllers.products.AdminAllProductsController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.products.ManageProductsController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>adminProducts</servlet-name>
-        <url-pattern>/admin/products/adminAll</url-pattern>
+        <url-pattern>/admin/products</url-pattern>
     </servlet-mapping>
 
     <servlet>

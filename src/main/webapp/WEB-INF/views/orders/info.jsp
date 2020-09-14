@@ -5,15 +5,15 @@
     <title>Order</title>
 </head>
 <body>
-<h1>Order ${orderId}</h1>
+<h1>Order ${order.id}</h1>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th>№</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
     <c:set var="index" value="0" />
-    <c:forEach var="product" items="${products}">
+    <c:forEach var="product" items="${order.products}">
         <tr>
             <td>
                 <c:out value="${index = index + 1}"/>

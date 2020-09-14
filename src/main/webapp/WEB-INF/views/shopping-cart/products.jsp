@@ -7,7 +7,7 @@
 <body>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th>№</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
@@ -26,16 +26,16 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                    /shopping-cart/remove?index=${index - 1}">Remove product</a>
+                    /shopping-cart/remove?id=${index - 1}">Remove product</a>
                 </td>
             </tr>
         </c:forEach>
 </table>
 <br/>
-<a href="${pageContext.request.contextPath}/products/all">Add more products</a>
+<a href="${pageContext.request.contextPath}/products">Add more products</a>
 <br/>
 <br/>
-<form method="post" action="${pageContext.request.contextPath}/orders/add">
+<form method="post" action="${pageContext.request.contextPath}/orders/complete">
     <br/>
     <button type="submit">Confirm order</button>
 </form>

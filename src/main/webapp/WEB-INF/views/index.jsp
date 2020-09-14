@@ -10,7 +10,7 @@
 <a href="${pageContext.request.contextPath}/inject-data">Test data</a>
 <br />
 <br />
-<a href="${pageContext.request.contextPath}/products/all">All products</a>
+<a href="${pageContext.request.contextPath}/products">All products</a>
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/users/all">All users</a>
@@ -19,10 +19,10 @@
 <a href="${pageContext.request.contextPath}/registration">Register here</a>
 <br />
 <br />
-<a href="${pageContext.request.contextPath}/admin/products/adminAll">(Admin access) All products</a>
+<a href="${pageContext.request.contextPath}/admin/products">(Admin access) All products</a>
 <br />
 <br />
-<a href="${pageContext.request.contextPath}/admin/orders/adminAll">(Admin access) All orders</a>
+<a href="${pageContext.request.contextPath}/admin/orders">(Admin access) All orders</a>
 <br />
 </body>
 </html>
