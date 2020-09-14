@@ -5,12 +5,12 @@
 </head>
 <br>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/admin/products/add">
+<form method="post" action="${pageContext.request.contextPath}/products/add">
     Product name: <input type="text" required="required" name="name">
     Product price: <input type="number" required="required" name="price">
     <button type="submit">add</button>
 </form>
-<br><a href="${pageContext.request.contextPath}/admin/products">To all products</a>
+<br><a href="${pageContext.request.contextPath}/products/manage">To all products</a>
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/">Return to the main page</a>

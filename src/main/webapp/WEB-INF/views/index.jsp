@@ -19,7 +19,7 @@
 <a href="${pageContext.request.contextPath}/registration">Register here</a>
 <br />
 <br />
-<a href="${pageContext.request.contextPath}/admin/products">(Admin access) All products</a>
+<a href="${pageContext.request.contextPath}/products/manage">(Admin access) All products</a>
 <br />
 <br />
 <a href="${pageContext.request.contextPath}/admin/orders">(Admin access) All orders</a>

@@ -21,7 +21,7 @@
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}
-                /admin/orders/delete?id=${order.id}">Delete order</a>
+                /orders/delete?id=${order.id}">Delete order</a>
             </td>
         </tr>
     </c:forEach>
