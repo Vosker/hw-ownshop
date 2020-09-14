@@ -31,4 +31,3 @@ public class AddProductController extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/admin/products/adminAll");
     }
 }
-
