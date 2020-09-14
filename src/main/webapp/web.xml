@@ -15,6 +15,56 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>addOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.CompleteOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addOrder</servlet-name>
+        <url-pattern>/orders/complete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.ShowUserOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>allOrders</servlet-name>
+        <url-pattern>/users/orders</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>showOrderInfo</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.ShowOrderInfoController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>showOrderInfo</servlet-name>
+        <url-pattern>/orders/info</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>adminOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.ShowAllOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>adminOrders</servlet-name>
+        <url-pattern>/admin/orders</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.orders.DeleteOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/orders/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>addProduct</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.AddProductController</servlet-class>
     </servlet>
@@ -25,13 +75,33 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>deleteProduct</servlet-name>
+        <servlet-class>com.internet.shop.controllers.products.DeleteProductController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteProduct</servlet-name>
+        <url-pattern>/products/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>allProducts</servlet-name>
         <servlet-class>com.internet.shop.controllers.products.GetAllProductsController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>allProducts</servlet-name>
-        <url-pattern>/products/all</url-pattern>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>adminProducts</servlet-name>
+        <servlet-class>com.internet.shop.controllers.products.ManageProductsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>adminProducts</servlet-name>
+        <url-pattern>/products/manage</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -42,6 +112,16 @@
     <servlet-mapping>
         <servlet-name>addProductToCart</servlet-name>
         <url-pattern>/shopping-cart/products/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>removeProductFromCart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.carts.RemoveProductFromCartController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>removeProductFromCart</servlet-name>
+        <url-pattern>/shopping-cart/products/remove</url-pattern>
     </servlet-mapping>
 
     <servlet>

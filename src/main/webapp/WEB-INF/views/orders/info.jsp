@@ -2,19 +2,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All products</title>
+    <title>Order</title>
 </head>
 <body>
+<h1>Order ${order.id}</h1>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th>№</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${products}">
+    <c:set var="index" value="0" />
+    <c:forEach var="product" items="${order.products}">
         <tr>
             <td>
-                <c:out value="${product.id}"/>
+                <c:out value="${index = index + 1}"/>
             </td>
             <td>
                 <c:out value="${product.name}"/>
@@ -22,16 +24,11 @@
             <td>
                 <c:out value="${product.price}"/>
             </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/shopping-cart/products/add?id=${product.id}">Buy</a>
-            </td>
         </tr>
     </c:forEach>
 </table>
 <br/>
-<a href="${pageContext.request.contextPath}/shopping-cart/products">View your cart</a>
-<br/>
-<br/>
 <a href="${pageContext.request.contextPath}/">To the main page</a>
+<br/>
 </body>
 </html>

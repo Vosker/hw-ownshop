@@ -7,28 +7,37 @@
 <body>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th>№</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
-    <c:forEach var="product" items="${products}">
-        <tr>
-            <td>
-                <c:out value="${product.id}"/>
-            </td>
-            <td>
-                <c:out value="${product.name}"/>
-            </td>
-            <td>
-                <c:out value="${product.price}"/>
-            </td>
-        </tr>
-    </c:forEach>
+    <c:set var="index" value="0" />
+        <c:forEach var="product" items="${products}">
+            <tr>
+                <td>
+                    <c:out value="${index = index + 1}"/>
+                </td>
+                <td>
+                    <c:out value="${product.name}"/>
+                </td>
+                <td>
+                    <c:out value="${product.price}"/>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}
+                    /shopping-cart/products/remove?id=${product.id}">Remove product</a>
+                </td>
+            </tr>
+        </c:forEach>
 </table>
 <br/>
+<a href="${pageContext.request.contextPath}/products">Add more products</a>
 <br/>
-<a href="${pageContext.request.contextPath}/products/all">Add more products</a>
 <br/>
+<form method="post" action="${pageContext.request.contextPath}/orders/complete">
+    <br/>
+    <button type="submit">Confirm order</button>
+</form>
 <br/>
 <a href="${pageContext.request.contextPath}/">To the main page</a>
 </body>
