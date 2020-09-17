@@ -24,5 +24,7 @@
 <br />
 <a href="${pageContext.request.contextPath}/admin/orders">(Admin access) All orders</a>
 <br />
+<br />
+<a href="${pageContext.request.contextPath}/logout"><button>Logout</button></a>
 </body>
 </html>
