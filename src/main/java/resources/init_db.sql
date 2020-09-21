@@ -1,6 +1,6 @@
-CREATE SCHEMA `own_shop` DEFAULT CHARACTER SET utf8;
+CREATE SCHEMA `own-shop` DEFAULT CHARACTER SET utf8;
 
-CREATE TABLE `own_shop`.`products`
+CREATE TABLE `own-shop`.`products`
 (
     `productId`  BIGINT(20)   NOT NULL AUTO_INCREMENT,
     `name`       VARCHAR(255) NOT NULL,

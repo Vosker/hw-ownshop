@@ -13,8 +13,10 @@ public class Application {
         System.out.println("Initial DB");
         productService.getAll().forEach(System.out::println);
         Product banana = new Product("banana", 1);
+        Product orange = new Product("orange", 5);
         System.out.println("Add product to DB");
         banana = productService.create(banana);
+        orange = productService.create(orange);
         productService.getAll().forEach(System.out::println);
 
         System.out.println("Get product from DB");
@@ -31,6 +33,7 @@ public class Application {
 
         System.out.println("Delete product");
         System.out.println(productService.delete(banana.getId()));
+        productService.delete(orange.getId());
         productService.getAll().forEach(System.out::println);
     }
 }
