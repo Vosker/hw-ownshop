@@ -164,6 +164,15 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>com.internet.shop.controllers.users.LogoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>authenticationFilter</filter-name>
         <filter-class>com.internet.shop.web.filter.AuthenticationFilter</filter-class>
@@ -171,6 +180,16 @@
 
     <filter-mapping>
         <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>authorizationFilter</filter-name>
+        <filter-class>com.internet.shop.web.filter.AuthorizationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>authorizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
