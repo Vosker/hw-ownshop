@@ -49,7 +49,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get id " + id, e);
+            throw new DataProcessingException("Can't get product with id " + id, e);
         }
     }
 
@@ -95,7 +95,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setLong(1, id);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete id: " + id, e);
+            throw new DataProcessingException("Can't delete product with id: " + id, e);
         }
     }
 
