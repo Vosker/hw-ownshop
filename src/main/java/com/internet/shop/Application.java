@@ -10,13 +10,15 @@ public class Application {
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
+        System.out.println("Initial DB");
+        productService.getAll().forEach(System.out::println);
         Product banana = new Product("banana", 1);
         System.out.println("Add product to DB");
         banana = productService.create(banana);
-        System.out.println(banana.toString());
+        productService.getAll().forEach(System.out::println);
 
         System.out.println("Get product from DB");
-        System.out.println(productService.get(1L).toString());
+        System.out.println(productService.get(banana.getId()).toString());
 
         System.out.println("Update product in DB");
         banana.setName("Apple");
