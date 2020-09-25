@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Dao
 public class OrderDaoImpl implements OrderDao {
 
     @Override

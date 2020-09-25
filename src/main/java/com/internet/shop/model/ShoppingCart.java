@@ -13,6 +13,12 @@ public class ShoppingCart {
         this.userId = userId;
     }
 
+    public ShoppingCart(Long id, Long userId) {
+        this.id = id;
+        this.userId = userId;
+        this.products = new ArrayList<>();
+    }
+
     public Long getId() {
         return id;
     }
