@@ -6,6 +6,7 @@ import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
+
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +36,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             order.setProducts(getProducts(order.getId()));
         }
         return orders;
-        }
+    }
 
     @Override
     public Order create(Order order) {
