@@ -89,7 +89,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE products SET isDeleted = TRUE WHERE productId = ?";
+        String query = "UPDATE products SET isDeleted = TRUE WHERE product_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
@@ -100,7 +100,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     }
 
     private Product getProduct(ResultSet resultSet) throws SQLException {
-        long productId = resultSet.getLong("productId");
+        long productId = resultSet.getLong("product_id");
         String name = resultSet.getString("name");
         double price = resultSet.getDouble("price");
         Product product = new Product(name, price);
