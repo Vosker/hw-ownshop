@@ -6,10 +6,9 @@ import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
-
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,172 +19,131 @@ import java.util.Optional;
 public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getUserOrders(Long userId) {
-        String query = "SELECT * FROM orders WHERE user_id = ?";
+        String query = "SELECT * FROM orders WHERE user_id = ? AND isDeleted = FALSE";
         List<Order> orders = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                orders.add(getOrderFromResultSet(resultSet));
+                orders.add(getOrderFromSet(resultSet, connection));
             }
+            return orders;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't get orders for user with id " + userId, e);
+            throw new DataProcessingException("Can't get orders for user with id " + userId, e);
         }
-        for (Order order : orders) {
-            order.setProducts(getProducts(order.getId()));
-        }
-        return orders;
     }
 
     @Override
     public Order create(Order order) {
-        String query = "INSERT INTO orders(user_id) VALUE (?)";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query,
-                    Statement.RETURN_GENERATED_KEYS);
+        String query = "INSERT INTO orders (user_id) VALUES (?)";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection
+                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, order.getUserId());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 order.setId(resultSet.getLong(1));
             }
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to create the order: "
-                    + order.getId(), exception);
+            addProductsToOrder(order, connection);
+            return order;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't create order for user "
+                    + order.getUserId(), e);
         }
-        addProducts(order.getProducts(), order.getId());
-        return order;
     }
 
     @Override
     public Optional<Order> get(Long orderId) {
         String query = "SELECT * FROM orders WHERE order_id = ? AND isDeleted = FALSE";
-        List<Product> productsInOrder = getProducts(orderId);
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, orderId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Order searchedOrder = getOrderFromResultSet(resultSet);
-                searchedOrder.setProducts(productsInOrder);
-                return Optional.of(searchedOrder);
+                return Optional.of(getOrderFromSet(resultSet, connection));
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Finding the order by id: "
-                    + orderId + "was failed. ", e);
+            throw new DataProcessingException("Can't get order with id " + orderId, e);
         }
     }
 
     @Override
     public List<Order> getAll() {
-        List<Order> allOrders = new ArrayList<>();
         String query = "SELECT * FROM orders WHERE isDeleted = FALSE";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                allOrders.add(getOrderFromResultSet(resultSet));
+                orders.add(getOrderFromSet(resultSet, connection));
             }
+            return orders;
         } catch (SQLException e) {
-            throw new DataProcessingException("Getting all orders from DB was failed", e);
+            throw new DataProcessingException("Can't get all orders", e);
         }
-        for (Order order : allOrders) {
-            order.setProducts(getProducts(order.getId()));
-        }
-        return allOrders;
     }
 
     @Override
     public Order update(Order order) {
-        Long orderId = order.getId();
-        List<Product> productsInOrder = order.getProducts();
-        String query = "UPDATE orders SET user_id = ? WHERE id = ? "
-                + "AND isDeleted = false";
+        String query = "DELETE FROM orders_products WHERE order_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, order.getUserId());
-            statement.setLong(2, orderId);
-            statement.executeUpdate();
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to update the order "
-                    + "with id: " + orderId, exception);
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, order.getId());
+            addProductsToOrder(order, connection);
+            return order;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't update order with id " + order.getId(), e);
         }
-        deleteProducts(orderId);
-        addProducts(productsInOrder, orderId);
-        return order;
     }
 
     @Override
     public boolean delete(Long id) {
-        deleteProducts(id);
-        String query = "UPDATE orders SET isDeleted = true WHERE id = ?";
+        String query = "UPDATE orders SET isDeleted = TRUE WHERE order_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
-            return statement.executeUpdate() != 0;
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to delete the order "
-                    + "with id: " + id, exception);
-        }
-    }
-
-    private void addProducts(List<Product> products, long orderId) {
-        String query = "INSERT INTO orders_products (order_id, product_id) VALUES (?, ?)";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            for (Product product : products) {
-                statement.setLong(1, orderId);
-                statement.setLong(2, product.getId());
-                statement.executeUpdate();
-            }
+            return statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("Adding products to order by order id: "
-                    + orderId + " was failed. ", e);
+            throw new DataProcessingException("Can't delete order with id " + id, e);
         }
     }
 
-    private List<Product> getProducts(Long orderId) {
-        String query = "SELECT * FROM product p INNER JOIN order_product op "
-                + "ON op.id_product = p.id WHERE op.id_order = ?";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, orderId);
-            ResultSet resultSet = statement.executeQuery();
-            List<Product> products = new ArrayList<>();
-            while (resultSet.next()) {
-                long id = resultSet.getLong("product_id");
-                String productName = resultSet.getString("type");
-                double price = resultSet.getDouble("price");
-                Product product = new Product(productName, price);
-                product.setId(id);
-                products.add(product);
-            }
-            return products;
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to get the products "
-                    + "of the order with id: " + orderId, exception);
+    private void addProductsToOrder(Order order, Connection connection) throws SQLException {
+        String query = "INSERT INTO orders_products (order_id, product_id)"
+                + " VALUES (?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        for (Product product : order.getProducts()) {
+            statement.setLong(1, order.getId());
+            statement.setLong(2, product.getId());
+            statement.executeUpdate();
         }
     }
 
-    private boolean deleteProducts(Long orderId) {
-        String query = "DELETE FROM order_product WHERE id_order = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, orderId);
-            return statement.executeUpdate() != 0;
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to delete the order's "
-                    + "products with id: " + orderId, exception);
-        }
-    }
-
-    private Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
+    private Order getOrderFromSet(ResultSet resultSet, Connection connection) throws SQLException {
         Long orderId = resultSet.getLong("order_id");
         Long userId = resultSet.getLong("user_id");
-        Order order = new Order(userId);
-        order.setId(orderId);
-        return order;
+        List<Product> products = getProductByOrder(orderId, connection);
+        return new Order(orderId, products, userId);
+    }
+
+    private List<Product> getProductByOrder(Long orderId, Connection connection)
+            throws SQLException {
+        String query = "SELECT p.product_id, name, product_price"
+                + " FROM products "
+                + " JOIN orders_products op ON p.product_id = op.product_id"
+                + " WHERE op.order_id = ?;";
+        List<Product> products = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setLong(1, orderId);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            products.add(new Product(resultSet.getLong("product_id"),
+                    resultSet.getString("name"),
+                    resultSet.getDouble("product_price")));
+        }
+        return products;
     }
 }
