@@ -12,7 +12,7 @@ CREATE TABLE `own-shop`.`products`
 CREATE TABLE `own-shop`.`roles`
 (
     `role_id`   BIGINT(11)   NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
+    `name`      VARCHAR(255) NOT NULL,
     PRIMARY KEY (`role_id`)
 );
 
@@ -22,13 +22,14 @@ CREATE TABLE `own-shop`.`users`
     `name`      VARCHAR(255) NOT NULL,
     `login`     VARCHAR(255) NOT NULL,
     `password`  VARCHAR(255) NOT NULL,
+    `salt`      VARBINARY(255) NOT NULL,
     `isDeleted` TINYINT NOT NULL NULL DEFAULT 0,
     PRIMARY KEY (`user_id`)
 );
 
 CREATE TABLE `own-shop`.`users_roles`
 (
-    `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+    `id`      BIGINT(11) NOT NULL AUTO_INCREMENT,
     `user_id` BIGINT(11) NOT NULL,
     `role_id` BIGINT(11) NOT NULL,
     PRIMARY KEY (`id`),
@@ -58,8 +59,8 @@ CREATE TABLE `own-shop`.`shopping_carts`
 
 CREATE TABLE `own-shop`.`shopping_carts_products`
 (
-    `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-    `cart_id` BIGINT(11) NOT NULL,
+    `id`         BIGINT(11) NOT NULL AUTO_INCREMENT,
+    `cart_id`    BIGINT(11) NOT NULL,
     `product_id` BIGINT(11) NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `cart`
@@ -76,8 +77,8 @@ CREATE TABLE `own-shop`.`shopping_carts_products`
 
 CREATE TABLE `own-shop`.`orders`
 (
-    `order_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-    `user_id` BIGINT(11) NOT NULL,
+    `order_id`  BIGINT(11) NOT NULL AUTO_INCREMENT,
+    `user_id`   BIGINT(11) NOT NULL,
     `isDeleted` TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (`order_id`),
     CONSTRAINT `user`
@@ -89,8 +90,8 @@ CREATE TABLE `own-shop`.`orders`
 
 CREATE TABLE `own-shop`.`orders_products`
 (
-    `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-    `order_id` BIGINT(11) NOT NULL,
+    `id`         BIGINT(11) NOT NULL AUTO_INCREMENT,
+    `order_id`   BIGINT(11) NOT NULL,
     `product_id` BIGINT(11) NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `product`
