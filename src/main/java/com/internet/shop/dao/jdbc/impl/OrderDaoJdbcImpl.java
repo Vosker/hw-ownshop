@@ -1,4 +1,4 @@
-package com.internet.shop.dao.jdbc.storage;
+package com.internet.shop.dao.jdbc.impl;
 
 import com.internet.shop.dao.OrderDao;
 import com.internet.shop.exceptions.DataProcessingException;
